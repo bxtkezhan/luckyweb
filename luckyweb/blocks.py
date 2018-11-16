@@ -28,6 +28,9 @@ class BaseBlock:
     def __repr__(self):
         return self.html
 
+    def __add__(self, obj):
+        return self.html + '\n' + str(obj)
+
     def encode(self, encoding='utf-8'):
         return self.html.encode(encoding)
 
@@ -36,15 +39,15 @@ class HtmlBlock(BaseBlock):
         super(HtmlBlock, self).__init__('html.tpl')
         self.args.update({'title': title})
 
-class ContainerBlock(BaseBlock):
+class GridBlock(BaseBlock):
     def __init__(self, cols_num=[], py=5):
-        super(ContainerBlock, self).__init__('container.tpl')
+        super(GridBlock, self).__init__('grid.tpl')
         self.args.update({'cols_num': cols_num, 'py': py})
 
 class NavbarBlock(BaseBlock):
-    def __init__(self, li_list=[]):
+    def __init__(self, li_list=[], ri_list=[]):
         super(NavbarBlock, self).__init__('navbar.tpl')
-        self.args.update({'li_list': li_list})
+        self.args.update({'li_list': li_list, 'ri_list': ri_list})
         self.html = self.template.render(args=self.args)
 
 class ImgBlock(BaseBlock):
@@ -52,4 +55,11 @@ class ImgBlock(BaseBlock):
         super(ImgBlock, self).__init__('img.tpl')
         self.args.update({
             'src': src, 'href': href, 'alt': alt})
+        self.html = self.template.render(args=self.args)
+
+class HeadingBlock(BaseBlock):
+    def __init__(self, text, head_num=3, display_num=None):
+        super(HeadingBlock, self).__init__('heading.tpl')
+        self.args.update({
+            'text': text, 'head_num': head_num, 'display_num': display_num})
         self.html = self.template.render(args=self.args)
