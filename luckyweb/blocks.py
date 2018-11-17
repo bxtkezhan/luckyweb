@@ -63,3 +63,9 @@ class HeadingBlock(BaseBlock):
         self.args.update({
             'text': text, 'head_num': head_num, 'display_num': display_num})
         self.html = self.template.render(args=self.args)
+
+class PBlock(BaseBlock):
+    def __init__(self, text, lead=False):
+        super(PBlock, self).__init__('p.tpl')
+        self.args.update({'text': text, 'lead': lead})
+        self.html = self.template.render(args=self.args)

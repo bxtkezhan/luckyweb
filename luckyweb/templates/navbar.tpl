@@ -21,11 +21,14 @@
 	  {% for ri in args.ri_list %}
 	    {% if not ri.get('btn') %}
         <li class="nav-item"> <a class="nav-link" href="{{ ri.href }}">{{ ri.text }}</a> </li>
-		{% else %}
-	    <a class="btn btn-primary navbar-btn ml-md-2" href="{{ ri.href }}">{{ ri.text }}</a>
 		{% endif %}
       {% endfor %}
       </ul>
+	  {% for ri in args.ri_list %}
+	    {% if ri.get('btn') %}
+      <a class="btn btn-primary navbar-btn ml-md-2" href="{{ ri.href }}">{{ ri.text }}</a>
+		{% endif %}
+      {% endfor %}
     </div>
   </div>
 </nav>

@@ -2,7 +2,7 @@ import blocks as B
 
 
 def hello_world(environ, start_response):
-    start_response('200 OK', [ ('Content-type','text/html')])
+    start_response('200 OK', [('Content-type','text/html')])
     params = environ['params']
 
     html = B.HtmlBlock(title='Hello LuckyWeb powered by msdl_kk')
@@ -17,26 +17,24 @@ def hello_world(environ, start_response):
             {'href': '#', 'text': 'Contact us', 'btn': True},
         ]
     )
+    head_img = B.HeadingBlock('Images', head_num=1, display_num=4)
     grid_img = B.GridBlock(cols_num=[2, 4, 2, 4], py=5)
     img = B.ImgBlock(src='/static/L.png', href='https://github.com/bxtkezhan')
-    grid_txt = B.GridBlock([3, 3, 3, 3], py=2)
-    head = B.HeadingBlock(params.get('name') or '', head_num=1, display_num=3)
-    grid_img_txt = B.GridBlock([2] * 6, py=3)
+    head_article = B.HeadingBlock('Article', head_num=1, display_num=4)
+    grid_article = B.GridBlock([2] * 6, py=5)
+    article = B.PBlock('Hello LuckWeb ... inputs: {}'.format(params.get('name') or ''))
 
     html([
         navbar,
+        head_img,
         grid_img( 
-            [img, img, img, img]
-        ),
-        grid_txt(
-            [head, head, head, head]
-        ),
-        grid_img_txt(
-            [img + head] * 6,
-        ),
+            [img, img, img, img]),
+        head_article,
+        grid_article(
+            [img + article] * 6),
     ])
 
-    yield html.encode('utf-8')
+    yield html.encode('UTF-8')
 
 if __name__ == '__main__':
     from resty import PathDispatcher
