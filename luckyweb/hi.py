@@ -2,7 +2,6 @@ import blocks as B
 
 
 def hello_world(environ, start_response):
-    start_response('200 OK', [('Content-type','text/html')])
     params = environ['params']
 
     html = B.HtmlBlock(title='Hello LuckyWeb powered by msdl_kk')
@@ -17,10 +16,10 @@ def hello_world(environ, start_response):
             {'href': '#', 'text': 'Contact us', 'btn': True},
         ]
     )
-    head_img = B.HeadingBlock('Images', head_num=1, display_num=4)
+    head_img = B.HeadBlock('Images', head_num=1, display_num=4)
     grid_img = B.GridBlock(cols_num=[2, 4, 2, 4], py=5)
     img = B.ImgBlock(src='/static/L.png', href='https://github.com/bxtkezhan')
-    head_article = B.HeadingBlock('Article', head_num=1, display_num=4)
+    head_article = B.HeadBlock('Article', head_num=1, display_num=4)
     grid_article = B.GridBlock([2] * 6, py=5)
     article = B.PBlock('Hello LuckWeb ... inputs: {}'.format(params.get('name') or ''))
 
@@ -34,7 +33,7 @@ def hello_world(environ, start_response):
             [img + article] * 6),
     ])
 
-    yield html.encode('UTF-8')
+    return html
 
 if __name__ == '__main__':
     from resty import PathDispatcher

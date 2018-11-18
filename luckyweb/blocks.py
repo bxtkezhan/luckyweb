@@ -57,9 +57,9 @@ class ImgBlock(BaseBlock):
             'src': src, 'href': href, 'alt': alt})
         self.html = self.template.render(args=self.args)
 
-class HeadingBlock(BaseBlock):
+class HeadBlock(BaseBlock):
     def __init__(self, text, head_num=3, display_num=None):
-        super(HeadingBlock, self).__init__('heading.tpl')
+        super(HeadBlock, self).__init__('head.tpl')
         self.args.update({
             'text': text, 'head_num': head_num, 'display_num': display_num})
         self.html = self.template.render(args=self.args)
