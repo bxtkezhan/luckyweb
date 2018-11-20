@@ -1,5 +1,6 @@
-{% if not args.get('lead') %}
-<p class="" >{{ args.text }}</p>
-{% else %}
-<p class="lead" >{{ args.text }}</p>
+{% if lead|not %}
+<p class="" >{{ text }}</p>
+{% endif %}
+{% if lead %}
+<p class="lead" >{{ text }}</p>
 {% endif %}

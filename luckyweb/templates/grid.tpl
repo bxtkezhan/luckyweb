@@ -1,16 +1,10 @@
-<div class="py-{{ args.py }}">
+<div class="py-{{ py }}">
   <div class="container-fluid">
     <div class="row">
-      {% for i in range(args.variable|length) %}
-	    {% if args.cols_num|length > i %}
-        <div class="col-sm-{{ args.cols_num[i] }}">
-  		  {{ args.variable[i] }}
+      {% for i in cols_num|len|range %}
+        <div class="col-sm-{{ cols_num[i] }}">
+  		  {{ variable[i] }}
   	    </div>
-		{% else %}
-        <div class="col-sm">
-  		  {{ args.variable[i] }}
-  	    </div>
-		{% endif %}
   	  {% endfor %}
     </div>
   </div>

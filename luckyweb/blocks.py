@@ -1,4 +1,5 @@
-from jinja2 import Template
+# from jinja2 import Template
+from templite import Templite as Template
 import collections
 import os
 
@@ -9,7 +10,7 @@ def load_template(filename):
     tpl_path = os.path.join(LUCKY_TEMPLATES, filename)
     with open(tpl_path) as f:
         tpl_str = f.read()
-    return Template(tpl_str)
+    return Template(tpl_str, {'range': range, 'len': len, 'not': lambda x: not x})
 
 class BaseBlock:
     def __init__(self, tpl_filename):
@@ -22,7 +23,7 @@ class BaseBlock:
             if isinstance(variable, str) or (not isinstance(variable, collections.Iterable)):
                 variable = [variable]
             self.args.update({'variable': variable})
-            self.html = self.template.render(args=self.args)
+            self.html = self.template.render(self.args)
         return self.html
 
     def __repr__(self):
@@ -48,24 +49,24 @@ class NavbarBlock(BaseBlock):
     def __init__(self, li_list=[], ri_list=[]):
         super(NavbarBlock, self).__init__('navbar.tpl')
         self.args.update({'li_list': li_list, 'ri_list': ri_list})
-        self.html = self.template.render(args=self.args)
+        self.html = self.template.render(self.args)
 
 class ImgBlock(BaseBlock):
     def __init__(self, src, href='#', alt='#'):
         super(ImgBlock, self).__init__('img.tpl')
         self.args.update({
             'src': src, 'href': href, 'alt': alt})
-        self.html = self.template.render(args=self.args)
+        self.html = self.template.render(self.args)
 
 class HeadBlock(BaseBlock):
     def __init__(self, text, head_num=3, display_num=None):
         super(HeadBlock, self).__init__('head.tpl')
         self.args.update({
             'text': text, 'head_num': head_num, 'display_num': display_num})
-        self.html = self.template.render(args=self.args)
+        self.html = self.template.render(self.args)
 
 class PBlock(BaseBlock):
     def __init__(self, text, lead=False):
         super(PBlock, self).__init__('p.tpl')
         self.args.update({'text': text, 'lead': lead})
-        self.html = self.template.render(args=self.args)
+        self.html = self.template.render(self.args)
