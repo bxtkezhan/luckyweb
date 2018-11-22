@@ -24,7 +24,7 @@ def hello_world(environ, start_response):
     article = B.PBlock('Hello LuckWeb ... inputs: {}'.format(params.get('name') or ''))
     head_table = B.HeadBlock('Tables', head_num=1, display_num=4, center=True)
     grid_table = B.GridBlock([3] * 4, py=5)
-    table = B.TableBlock(_class="table-striped table-dark", array=[
+    table = B.TableBlock(array=[
         ['#', 'Name', 'Email'],
         ['0', 'KK', 'K@gmail.com'],
         ['1', 'LL', 'L@gmail.com']])

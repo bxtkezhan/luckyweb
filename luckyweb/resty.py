@@ -91,11 +91,12 @@ class StaticHandle:
             return notfound_404(environ, start_response)
 
 class DocumentHandle:
-    def __init__(self, function):
+    def __init__(self, function, content_type):
         self.func = function
+        self.content_type = content_type
 
     def __call__(self, environ, start_response):
-        start_response('200 OK', [('Content-type','text/html')])
+        start_response('200 OK', [('Content-type', self.content_type)])
         dumps = self.func(environ, start_response)
         if hasattr(dumps, 'encode'):
             dumps = dumps.encode()
@@ -121,6 +122,6 @@ class PathDispatcher:
         handler = self.pathmap.get((method, '/' + path), notfound_404)
         return handler(environ, start_response)
 
-    def register(self, method, path, function):
-        self.pathmap[method.lower(), path] = DocumentHandle(function)
+    def register(self, method, path, function, content_type='text/html'):
+        self.pathmap[method.lower(), path] = DocumentHandle(function, content_type)
         return function

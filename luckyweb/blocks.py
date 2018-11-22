@@ -161,7 +161,7 @@ class Template(object):
             format_item = lambda x: x if (isinteger(x) or len(x) == 0) else 'c_{}'.format(x)
             i_name = [format_item(item) for item in i_name.split(':')]
             i_name = ':'.join(i_name)
-            code = 'c_{}[{}]'.format(f_name, i_name)
+            code = '{}[{}]'.format(self._expr_code(f_name), i_name)
         # <<<
         else:
             self._variable(expr, self.all_vars)
