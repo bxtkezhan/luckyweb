@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+<nav class="navbar navbar-expand-lg {{ _class }}" >
   <div class="container"> <a class="navbar-brand" href="{{ li_list[0].href }}">
       <i class="fa d-inline fa-lg fa-circle-o"></i>
       <b> {{ li_list[0].text }} </b>
@@ -10,8 +10,7 @@
       {% for li in li_list[1:] %}
 	    {% if li.active %}
         <li class="nav-item active">
-		{% endif %}
-	    {% if li.active|not %}
+		{% else %}
         <li class="nav-item">
 		{% endif %}
           <a href="{{ li.href }}" class="nav-link">{{ li.text }}</a>

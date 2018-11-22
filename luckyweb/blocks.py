@@ -94,6 +94,16 @@ class Template(object):
                     self._variable(words[1], self.loop_vars)
                     code.add_line('for c_{} in {}:'.format(words[1], self._expr_code(words[3])))
                     code.indent()
+                # >>> Test code
+                elif words[0] == 'else':
+                    if len(words) != 1:
+                        self._syntax_error("Don't understand else", token)
+                    if not ops_stack:
+                        self._syntax_error('Mismatched ops tag', token)
+                    code.dedent()
+                    code.add_line('else:')
+                    code.indent()
+                # <<<
                 elif words[0].startswith('end'):
                     if len(words) != 1:
                         self._syntax_error("Don't understand end", token)
@@ -137,11 +147,18 @@ class Template(object):
             args = ', '.join(repr(d) for d in dots[1:])
             code = 'do_dots({}, {})'.format(code, args)
         # >>> Test code
-        elif re.match(r'[_a-zA-Z][_a-zA-Z0-9]*\[[_a-zA-Z0-9:]+\]$', expr):
+        elif re.match(r'[_a-zA-Z][_a-zA-Z0-9]*\[[_a-zA-Z0-9:\-]+\]$', expr) and (len(expr.split(':')) <= 3):
             f_name = expr.split('[')[0]
             i_name = expr.split('[')[1].split(']')[0]
             self._variable(f_name, self.all_vars)
-            format_item = lambda x: x if (str.isdigit(x) or len(x) == 0) else 'c_{}'.format(x)
+            def isinteger(string):
+                print('Debug', string)
+                try:
+                    num = int(string)
+                except ValueError:
+                    return False
+                return True
+            format_item = lambda x: x if (isinteger(x) or len(x) == 0) else 'c_{}'.format(x)
             i_name = [format_item(item) for item in i_name.split(':')]
             i_name = ':'.join(i_name)
             code = 'c_{}[{}]'.format(f_name, i_name)
@@ -170,7 +187,7 @@ class Template(object):
             try:
                 value = getattr(value, dot)
             except AttributeError:
-                value = value.get(dot)
+                value = value.get(dot, '')
             if callable(value):
                 value = value()
         return value
@@ -215,23 +232,23 @@ class GridBlock(BaseBlock):
         self.args.update({'cols_num': cols_num, 'py': py})
 
 class NavbarBlock(BaseBlock):
-    def __init__(self, li_list=[], ri_list=[]):
+    def __init__(self, li_list=[], ri_list=[], _class='bg-dark navbar-dark'):
         super(NavbarBlock, self).__init__('navbar.tpl')
-        self.args.update({'li_list': li_list, 'ri_list': ri_list})
+        self.args.update({'li_list': li_list, 'ri_list': ri_list, '_class': _class})
         self.html = self.template.render(self.args)
 
 class ImgBlock(BaseBlock):
-    def __init__(self, src, href='#', alt='#'):
+    def __init__(self, src, href='#', alt='#', _class='img-thumbnail'):
         super(ImgBlock, self).__init__('img.tpl')
         self.args.update({
-            'src': src, 'href': href, 'alt': alt})
+            'src': src, 'href': href, 'alt': alt, '_class': _class})
         self.html = self.template.render(self.args)
 
 class HeadBlock(BaseBlock):
-    def __init__(self, text, head_num=3, display_num=None):
+    def __init__(self, text, head_num=3, display_num=None, center=None):
         super(HeadBlock, self).__init__('head.tpl')
         self.args.update({
-            'text': text, 'head_num': head_num, 'display_num': display_num})
+            'text': text, 'head_num': head_num, 'display_num': display_num, 'center': center})
         self.html = self.template.render(self.args)
 
 class PBlock(BaseBlock):
@@ -239,3 +256,16 @@ class PBlock(BaseBlock):
         super(PBlock, self).__init__('p.tpl')
         self.args.update({'text': text, 'lead': lead})
         self.html = self.template.render(self.args)
+
+class TableBlock(BaseBlock):
+    def __init__(self, array, _class=''):
+        super(TableBlock, self).__init__('table.tpl')
+        self.args.update({'array': array, '_class': _class})
+        self.html = self.template.render(self.args)
+
+class PaginationBlock(BaseBlock):
+    def __init__(self, pages=[], _class=''):
+        super(PaginationBlock, self).__init__('pagination.tpl')
+        self.args.update({'pages': pages})
+        self.html = self.template.render(self.args)
+
