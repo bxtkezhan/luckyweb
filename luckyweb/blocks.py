@@ -94,7 +94,6 @@ class Template(object):
                     self._variable(words[1], self.loop_vars)
                     code.add_line('for c_{} in {}:'.format(words[1], self._expr_code(words[3])))
                     code.indent()
-                # >>> Test code
                 elif words[0] == 'else':
                     if len(words) != 1:
                         self._syntax_error("Don't understand else", token)
@@ -103,7 +102,6 @@ class Template(object):
                     code.dedent()
                     code.add_line('else:')
                     code.indent()
-                # <<<
                 elif words[0].startswith('end'):
                     if len(words) != 1:
                         self._syntax_error("Don't understand end", token)
@@ -146,7 +144,6 @@ class Template(object):
             code = self._expr_code(dots[0])
             args = ', '.join(repr(d) for d in dots[1:])
             code = 'do_dots({}, {})'.format(code, args)
-        # >>> Test code
         elif re.match(r'[_a-zA-Z][_a-zA-Z0-9]*\[[_a-zA-Z0-9:\-]+\]$', expr) and (len(expr.split(':')) <= 3):
             f_name = expr.split('[')[0]
             i_name = expr.split('[')[1].split(']')[0]
@@ -162,7 +159,6 @@ class Template(object):
             i_name = [format_item(item) for item in i_name.split(':')]
             i_name = ':'.join(i_name)
             code = '{}[{}]'.format(self._expr_code(f_name), i_name)
-        # <<<
         else:
             self._variable(expr, self.all_vars)
             code = 'c_{}'.format(expr)
@@ -257,6 +253,12 @@ class PBlock(BaseBlock):
         self.args.update({'text': text, 'lead': lead})
         self.html = self.template.render(self.args)
 
+class ABlock(BaseBlock):
+    def __init__(self, text, href='#', _class="btn-primary"):
+        super(ABlock, self).__init__('a.tpl')
+        self.args.update({'text': text, 'href': href, '_class': _class})
+        self.html = self.template.render(self.args)
+
 class TableBlock(BaseBlock):
     def __init__(self, array, _class=''):
         super(TableBlock, self).__init__('table.tpl')
@@ -264,8 +266,19 @@ class TableBlock(BaseBlock):
         self.html = self.template.render(self.args)
 
 class PaginationBlock(BaseBlock):
-    def __init__(self, pages=[], _class=''):
+    def __init__(self, pages=[]):
         super(PaginationBlock, self).__init__('pagination.tpl')
         self.args.update({'pages': pages})
         self.html = self.template.render(self.args)
+
+class ListBlock(BaseBlock):
+    def __init__(self, _list=[], _class=''):
+        super(ListBlock, self).__init__('list.tpl')
+        self.args.update({'_list': _list, '_class': _class})
+        self.html = self.template.render(self.args)
+
+class CardBlock(BaseBlock):
+    def __init__(self, header=''):
+        super(CardBlock, self).__init__('card.tpl')
+        self.args.update({'header': header})
 

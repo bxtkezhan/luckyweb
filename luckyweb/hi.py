@@ -19,6 +19,7 @@ def hello_world(environ, start_response):
     head_img = B.HeadBlock('Images', head_num=1, display_num=4, center=True)
     grid_img = B.GridBlock(cols_num=[2, 4, 2, 4], py=5)
     img = B.ImgBlock(src='/static/L.png', href='https://github.com/bxtkezhan')
+    button = B.ABlock(text='Click')
     head_article = B.HeadBlock('Article', head_num=1, display_num=4, center=True)
     grid_article = B.GridBlock([2] * 6, py=5)
     article = B.PBlock('Hello LuckWeb ... inputs: {}'.format(params.get('name') or ''))
@@ -35,18 +36,27 @@ def hello_world(environ, start_response):
         {'href': '#', 'text': 3},
         {'href': '#', 'text': 4},
         {'href': '#', 'text': 'Next'}])
+    grid_card = B.GridBlock(cols_num=[4, 4, 4])
+    card = B.CardBlock(header='Hello Card')
+    glist = B.ListBlock(_list=[
+        {'href': '#', 'text': 'hello list1'},
+        {'href': '#', 'text': 'hello list2'},
+        {'href': '#', 'text': 'hello list3'},
+        {'href': '#', 'text': 'hello list4'}])
 
     html([
         navbar,
         head_img,
         grid_img( 
-            [img, img, img, img]),
+            [img + button] * 4),
         head_article,
         grid_article(
             [img + article] * 6),
         head_table,
         grid_table(
             [table + pages] * 4),
+        grid_card(
+            [card('<p>Welcome to my website!</p>' + str(glist))] * 3),
     ])
 
     return html
