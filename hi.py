@@ -1,4 +1,4 @@
-import blocks as B
+import luckyweb.blocks as B
 
 
 def hello_world(environ, start_response):
@@ -43,6 +43,9 @@ def hello_world(environ, start_response):
         {'href': '#', 'text': 'hello list2'},
         {'href': '#', 'text': 'hello list3'},
         {'href': '#', 'text': 'hello list4'}])
+    form = B.FormBlock('/', method='get', groups=[
+        {'label': 'Name', 'type': 'text', 'placeholder': 'please input name text', 'name': 'name'},
+        {'label': 'Password', 'type': 'password', 'placeholder': 'test item ....'}])
 
     html([
         navbar,
@@ -56,13 +59,13 @@ def hello_world(environ, start_response):
         grid_table(
             [table + pages] * 4),
         grid_card(
-            [card('<p>Welcome to my website!</p>' + str(glist))] * 3),
+            [card('<p>Welcome to my website!</p>' + str(glist) + str(form))] * 3),
     ])
 
     return html
 
 if __name__ == '__main__':
-    from resty import PathDispatcher
+    from luckyweb.resty import PathDispatcher
     from wsgiref.simple_server import make_server
     import os
 

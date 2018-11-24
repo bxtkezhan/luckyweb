@@ -129,8 +129,8 @@ class Template(object):
         code.add_line("return ''.join(result)")
         code.dedent()
         self._render_function = code.get_globals()['render_function']
-        print('=' * 32)
-        print(code)
+        # print('=' * 32)
+        # print(code)
 
     def _expr_code(self, expr):
         if '|' in expr:
@@ -149,7 +149,7 @@ class Template(object):
             i_name = expr.split('[')[1].split(']')[0]
             self._variable(f_name, self.all_vars)
             def isinteger(string):
-                print('Debug', string)
+                # print('Debug', string)
                 try:
                     num = int(string)
                 except ValueError:
@@ -281,4 +281,13 @@ class CardBlock(BaseBlock):
     def __init__(self, header=''):
         super(CardBlock, self).__init__('card.tpl')
         self.args.update({'header': header})
+
+class FormBlock(BaseBlock):
+    def __init__(self, action, groups, method='post',
+                 enctype='multipart/form-data', submit_text='Submit'):
+        super(FormBlock, self).__init__('form.tpl')
+        self.args.update({
+            'action': action, 'groups': groups, 'method': method,
+            'enctype': enctype, 'submit_text': submit_text})
+        self.html = self.template.render(self.args)
 
