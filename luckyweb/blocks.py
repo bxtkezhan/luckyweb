@@ -42,7 +42,24 @@ class CodeBuilder(object):
         return global_namespace
 
 class Template(object):
+    '''
+    Example:
+    >>> html = '<h1> Hello {{ name }} </h1>'
+    >>> template = Template(html)
+    >>> template.render({'name': 'kk'})
+    '''
     def __init__(self, text, *contexts):
+        '''
+        Arguments:
+        - text: html string
+        - *contexts: additions function in dict object, it's a option
+
+        Examples:
+        >>> html = '<h1> Hello {{ name|upper }} </h1>'
+        >>> tpl = Template(html, {'upper': str.upper})
+        >>> tpl.render({'name': 'kk'})
+        #<h1> Hello KK </h1>
+        '''
         self.context = {}
         for context in contexts:
             self.context.update(context)
@@ -173,6 +190,9 @@ class Template(object):
         vars_set.add(name)
 
     def render(self, context=None):
+        '''
+        Argument: context is a dict object, be use to transfer variable to template
+        '''
         render_context = dict(self.context)
         if context:
             render_context.update(context)
