@@ -43,7 +43,7 @@ def hello_world(environ, start_response):
         {'href': '#', 'text': 'hello list2'},
         {'href': '#', 'text': 'hello list3'},
         {'href': '#', 'text': 'hello list4'}])
-    form = B.FormBlock('/', method='get', groups=[
+    form = B.FormBlock('/', method='post', groups=[
         {'label': 'Name', 'type': 'text', 'placeholder': 'please input name text', 'name': 'name'},
         {'label': 'Password', 'type': 'password', 'placeholder': 'test item ....'}])
 
@@ -71,6 +71,7 @@ if __name__ == '__main__':
 
     dispatcher = PathDispatcher()
     dispatcher.register('GET', '/', hello_world)
+    dispatcher.register('POST', '/', hello_world)
 
     # Launch a basic server
     httpd = make_server('', 8000, dispatcher)
