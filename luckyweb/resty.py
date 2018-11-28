@@ -19,6 +19,7 @@ class StaticHandle:
 
     # Search File
     def search_file(self, relative_file_path, dirs):
+        print(relative_file_path)
         for d in dirs:
             if not os.path.isabs(d):
                 d = os.path.abspath(d) + os.sep
@@ -33,7 +34,8 @@ class StaticHandle:
         return str(stats.st_size)
 
     def generate_last_modified(self):
-        last_modified = time.strftime("%a, %d %b %Y %H:%M:%sS GMT", time.gmtime())
+        # last_modified = time.strftime("%a, %d %b %Y %H:%M:%sS GMT", time.gmtime())
+        last_modified = time.strftime("%a, %d %b %Y %T GMT", time.gmtime())
         return last_modified
 
     def get_content_type(self, mimetype, charset):
