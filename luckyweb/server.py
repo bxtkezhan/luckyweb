@@ -3,6 +3,8 @@ import os
 import time
 import mimetypes
 from wsgiref.headers import Headers
+import json
+from wsgiref.simple_server import make_server
 
 
 def notfound_404(environ, start_response):
@@ -70,7 +72,7 @@ class StaticHandle:
         method = environ['REQUEST_METHOD'].upper()
         if method not in ('HEAD', 'GET'):
             start_response('405 METHOD NOT ALLOWED',
-                           [('Content-Type', 'text/plain; UTF-8')])
+                           [('Content-Type', 'text/plain; charset=UTF-8')])
             return [b'']
 
         mimetype, encoding = mimetypes.guess_type(filename)
@@ -92,25 +94,55 @@ class StaticHandle:
         else:
             return notfound_404(environ, start_response)
 
+class Request:
+    def __init__(self, environ):
+        self.environ = environ
+        self.params = self.environ.get('params', dict())
+        self.method = self.environ.get('REQUEST_METHOD')
+
+class Response:
+    def __init__(self, start_response, charset):
+        self.start_response = start_response
+        self.charset = charset
+        self.content_type = 'text/html; charset={}'.format(self.charset)
+        self.started = False
+
+    def set_content_type(self, content_type):
+        self.content_type = '{}; charset={}'.format(content_type, self.charset)
+
+    def jsonify(self, obj):
+        self.content_type = 'application/json; charset={}'.format(self.charset)
+        return json.dumps(obj)
+
+    def start(self):
+        if not self.started:
+            self.start_response('200 OK', [('Content-type', self.content_type)])
+            self.started = True
+            return True
+        return False
+
 class DocumentHandle:
-    def __init__(self, function, content_type):
+    def __init__(self, function, charset):
         self.func = function
-        self.content_type = content_type
+        self.charset = charset
 
     def __call__(self, environ, start_response):
-        start_response('200 OK', [('Content-type', self.content_type)])
-        dumps = self.func(environ, start_response)
+        request = Request(environ)
+        response = Response(start_response, self.charset)
+        dumps = self.func(request, response)
+        response.start()
         if hasattr(dumps, 'encode'):
             dumps = dumps.encode()
         yield dumps
 
-class PathDispatcher:
+class Server:
     def __init__(self, static_root='static', static_dirs=None,
                  block_size=16 * 4096, charset='UTF-8'):
         self.pathmap = { }
         self.static_root = static_root.lstrip('/').rstrip('/')
+        self.charset = charset
         self.pathmap[self.static_root] = StaticHandle(
-                static_dirs, block_size, charset)
+                static_dirs, block_size, self.charset)
 
     def __call__(self, environ, start_response):
         path = environ['PATH_INFO'].lstrip('/')
@@ -124,6 +156,16 @@ class PathDispatcher:
         handler = self.pathmap.get((method, '/' + path), notfound_404)
         return handler(environ, start_response)
 
-    def register(self, method, path, function, content_type='text/html'):
-        self.pathmap[method.lower(), path] = DocumentHandle(function, content_type)
+    def register(self, path, function, methods=['GET']):
+        for method in methods:
+            self.pathmap[method.lower(), path] = DocumentHandle(function, self.charset)
         return function
+
+    def run(self, host='127.0.0.1', post=8000):
+        # Launch a basic server
+        httpd = make_server(host, post, self)
+        print('Running on http://{}:{}/ (Press CTRL+C to quit)'.format(host, post))
+        try: 
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            print('\nServer closed.')
