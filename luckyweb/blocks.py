@@ -238,9 +238,15 @@ class BaseBlock:
         return self.html.encode(encoding)
 
 class HtmlBlock(BaseBlock):
-    def __init__(self, title=''):
+    def __init__(self, title='', css_urls=[], js_urls=[]):
+        css_urls = css_urls or [
+            'https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css']
+        js_urls = js_urls or [
+            'https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js',
+            'https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js',
+            'https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js']
         super(HtmlBlock, self).__init__('html.tpl')
-        self.args.update({'title': title})
+        self.args.update({'title': title, 'css_urls': css_urls, 'js_urls': js_urls})
 
 class GridBlock(BaseBlock):
     def __init__(self, cols_num=[], py=5):

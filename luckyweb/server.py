@@ -138,6 +138,13 @@ class DocumentHandle:
 class Server:
     def __init__(self, static_root='static', static_dirs=None,
                  block_size=16 * 4096, charset='UTF-8'):
+        '''
+        Arguments:
+        - static_root: static path root for url, default static
+        - static_dirs: truth static files direct directory
+        - block_size: static file load block size, default 16 * 4096
+        - charset: default utf-8
+        '''
         self.pathmap = { }
         self.static_root = static_root.lstrip('/').rstrip('/')
         self.charset = charset
@@ -162,7 +169,6 @@ class Server:
         return function
 
     def run(self, host='127.0.0.1', post=8000):
-        # Launch a basic server
         httpd = make_server(host, post, self)
         print('Running on http://{}:{}/ (Press CTRL+C to quit)'.format(host, post))
         try: 
