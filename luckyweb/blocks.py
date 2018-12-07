@@ -233,6 +233,7 @@ class BaseBlock:
 
     def __add__(self, obj):
         return self.html + '\n' + str(obj)
+    __radd__ = __add__
 
     def encode(self, encoding='utf-8'):
         return self.html.encode(encoding)
