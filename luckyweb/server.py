@@ -125,6 +125,11 @@ class Response:
             return True
         return False
 
+    def redirect(self, location):
+        self.start_response('302 Found', [('Location', location)])
+        self.started = True
+        return '1'
+
 class DocumentHandle:
     def __init__(self, function, charset):
         self.func = function

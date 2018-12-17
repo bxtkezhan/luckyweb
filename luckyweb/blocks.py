@@ -240,6 +240,12 @@ class BaseBlock:
 
 class HtmlBlock(BaseBlock):
     def __init__(self, title='', css_urls=[], js_urls=[]):
+        '''
+        Arguments:
+        - title: text content of html title element
+        - css_urls: css link list
+        - js_urls: javascript link list
+        '''
         css_urls = css_urls or [
             'https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css']
         js_urls = js_urls or [
@@ -251,13 +257,24 @@ class HtmlBlock(BaseBlock):
 
 class GridBlock(BaseBlock):
     def __init__(self, cols_num=[], py=5):
+        '''
+        Arguments:
+        - cols_num: container col-sm-num list in bootstrap framwork
+        - py: padding y num in bootstrap framework, default is 5
+        '''
         super(GridBlock, self).__init__('grid.tpl')
         self.args.update({'cols_num': cols_num, 'py': py})
 
 class NavbarBlock(BaseBlock):
-    def __init__(self, li_list=[], ri_list=[], _class='bg-dark navbar-dark'):
+    def __init__(self, left_items=[], right_items=[], _class='bg-dark navbar-dark'):
+        '''
+        Arguments:
+        - left_items: is a list of dicts, [dict(active=True, href='xxx', text='xxx') ... ]
+        - right_items: is a list of dicts, [dict(btn=False, href='xxx', text='xxx') ... ]
+        - _class: is a html attr, same to class in html
+        '''
         super(NavbarBlock, self).__init__('navbar.tpl')
-        self.args.update({'li_list': li_list, 'ri_list': ri_list, '_class': _class})
+        self.args.update({'left_items': left_items, 'right_items': right_items, '_class': _class})
         self.html = self.template.render(self.args)
 
 class ImgBlock(BaseBlock):

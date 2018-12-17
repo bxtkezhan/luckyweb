@@ -6,12 +6,12 @@ def helloblocks(request, response):
 
     html = B.HtmlBlock(title='Hello lucky blocks')
     navbar = B.NavbarBlock(
-        li_list=[
+        left_items=[
             {'href': '/', 'text': 'Lucky Web'},
             {'href': '/', 'text': 'Home', 'active': True},
             {'href': '#', 'text': 'Article'},
         ],
-        ri_list=[
+        right_items=[
             {'href': '#', 'text': 'About'},
             {'href': '#', 'text': 'Contact us', 'btn': True},
         ]
@@ -25,7 +25,7 @@ def helloblocks(request, response):
         {'href': '#', 'text': 'Admit impediments. Love is not love - 有任何障碍。这样的爱不是真爱'},
         {'href': '#', 'text': 'Which alters when it alteration finds, - 若是遇有变节的机会就改变，'},
         {'href': '#', 'text': 'Or bends with the remover to remove: - 或是被强势剥离就屈服：'},
-        {'href': '#', 'text': 'O, no! it is an ever-fix`ed mark, 哦，- 那不是爱！爱是坚定的烽火，'}])
+        {'href': '#', 'text': 'O, no! it is an ever-fix`ed mark, - 哦，那不是爱！爱是坚定的烽火，'}])
 
     grid_2 = B.GridBlock([6, 6])
     card = B.CardBlock('La La La !!!')
