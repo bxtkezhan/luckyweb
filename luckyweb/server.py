@@ -110,6 +110,10 @@ class Response:
     def set_content_type(self, content_type):
         self.content_type = '{}; charset={}'.format(content_type, self.charset)
 
+    def plain(self, obj):
+        self.content_type = 'text/plain; charset={}'.format(self.charset)
+        return obj
+
     def jsonify(self, obj):
         self.content_type = 'application/json; charset={}'.format(self.charset)
         return json.dumps(obj)
