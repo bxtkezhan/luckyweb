@@ -14,8 +14,6 @@ def helloserver(request, response):
         grid(['', form, '']),
     )
 
-    print(request.environ.get('userfile'))
-
     return html
 
 if __name__ == '__main__':
