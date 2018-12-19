@@ -23,4 +23,4 @@ if __name__ == '__main__':
 
     app = LuckyWeb()
     app.register('/', helloserver, methods=['GET', 'POST'])
-    app.run(host='localhost', post=5000)
+    app.run()

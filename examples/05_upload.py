@@ -14,8 +14,6 @@ def helloserver(request, response):
         grid(['', form, '']),
     )
 
-    print(request.environ.get('userfile'))
-
     return html
 
 if __name__ == '__main__':
@@ -23,4 +21,4 @@ if __name__ == '__main__':
 
     app = LuckyWeb()
     app.register('/', helloserver, methods=['GET', 'POST'])
-    app.run(host='localhost', post=5000)
+    app.run()
