@@ -279,13 +279,27 @@ class NavbarBlock(BaseBlock):
 
 class ImgBlock(BaseBlock):
     def __init__(self, src, href='#', alt='#', _class='img-thumbnail'):
+        '''
+        Arugments:
+        - src: attr of img tag
+        - href: attr of img tag, default '#'
+        - alt: attr of img tag, default '#'
+        - _class: class of img tag, default 'img-thumbnail'
+        '''
         super(ImgBlock, self).__init__('img.tpl')
         self.args.update({
             'src': src, 'href': href, 'alt': alt, '_class': _class})
         self.html = self.template.render(self.args)
 
 class HeadBlock(BaseBlock):
-    def __init__(self, text, head_num=3, display_num=None, center=None):
+    def __init__(self, text, head_num=3, display_num=None, center=False):
+        '''
+        Arguments:
+        - text: text string in head tag
+        - head_num: <h{{ head_num }}> ... </h{{ head_num }}>
+        - display_num: <h1 class="display-{{ display_num }}"> ...
+        - center: type is bool, if center is True, addition <center> tag over head
+        '''
         super(HeadBlock, self).__init__('head.tpl')
         self.args.update({
             'text': text, 'head_num': head_num, 'display_num': display_num, 'center': center})
