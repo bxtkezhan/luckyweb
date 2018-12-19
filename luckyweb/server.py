@@ -177,9 +177,9 @@ class Server:
             self.pathmap[method.lower(), path] = DocumentHandle(function, self.charset)
         return function
 
-    def run(self, host='127.0.0.1', post=8000):
-        httpd = make_server(host, post, self)
-        print('Running on http://{}:{}/ (Press CTRL+C to quit)'.format(host, post))
+    def run(self, host='127.0.0.1', port=8000):
+        httpd = make_server(host, port, self)
+        print('Running on http://{}:{}/ (Press CTRL+C to quit)'.format(host, port))
         try: 
             httpd.serve_forever()
         except KeyboardInterrupt:

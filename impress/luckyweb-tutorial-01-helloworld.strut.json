@@ -1,0 +1,293 @@
+{
+  "slides": [
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 300,
+          "y": 300,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "<font><b>搭建开发环境</b></font>",
+          "size": 72,
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 0,
+      "selected": true,
+      "active": true,
+      "x": 200,
+      "y": 191
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 150,
+          "y": 100,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "<font>python3</font>",
+          "size": 64,
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 150,
+          "y": 200,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 64,
+          "text": "git client<br>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 150,
+          "y": 300,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 64,
+          "text": "<font>pip</font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 150,
+          "y": 400,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 64,
+          "text": "<font>virtualenv</font>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 1,
+      "selected": false,
+      "active": false,
+      "x": 434,
+      "y": 191,
+      "markdown": ""
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 100,
+          "y": 200,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 36,
+          "text": "<font>git clone https://github.com/bxtkezhan/luckyweb.git</font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 100,
+          "y": 250,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 36,
+          "text": "<font>cd luckyweb</font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 100,
+          "y": 300,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 36,
+          "text": "<font>python3 setup.py build<br></font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 100,
+          "y": 350,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 36,
+          "text": "<font>python3 setup.py install</font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 379,
+          "y": 58,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 48,
+          "text": "<font>从本地构建</font>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": -0.52,
+      "index": 2,
+      "selected": false,
+      "active": false,
+      "x": 667,
+      "y": 121,
+      "markdown": ""
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 274,
+          "y": 58,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 48,
+          "text": "<font>直接使用pip进行安装</font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 63,
+          "y": 200,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 36,
+          "text": "<font>pip install git+https://github.com/bxtkezhan/luckyweb.git</font>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 3,
+      "selected": false,
+      "active": false,
+      "x": 667,
+      "y": 279
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 145,
+          "y": 280,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 96,
+          "text": "<font><b>完成 Hello World</b></font>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 4,
+      "selected": false,
+      "active": false,
+      "x": 434,
+      "y": 349
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 5,
+      "selected": false,
+      "active": false,
+      "markdown": "### Hello World Code\n\n```\n\n# filename: helloworld.py\n# run: python3 helloworld.py\n\ndef helloworld(request, response):\n    return '<h1> Hello world </h1>'\n\nif __name__ == '__main__':\n    from luckyweb import LuckyWeb\n\n    app = LuckyWeb()\n    app.register('/', helloworld)\n    app.run()\n\n# end.\n```\n",
+      "x": 434,
+      "y": 509
+    }
+  ],
+  "activeSlide": {
+    "components": [
+      {
+        "TextBox": {},
+        "x": 300,
+        "y": 300,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "TextBox",
+        "text": "<font><b>搭建开发环境</b></font>",
+        "size": 72,
+        "selected": false
+      }
+    ],
+    "z": 0,
+    "impScale": 3,
+    "rotateX": 0,
+    "rotateY": 0,
+    "rotateZ": 0,
+    "index": 0,
+    "selected": true,
+    "active": true,
+    "x": 200,
+    "y": 191
+  },
+  "fileName": "luckyweb-tutorial-01-helloworld.strut",
+  "surface": "bg-surf-grad-light",
+  "customStylesheet": "/*.example {\n\tborder: 4px groove orange;\n}*/\n\n.strut-surface .title_area {\n  border: 4px groove gray;\n}",
+  "deckVersion": "1.0",
+  "customBackgrounds": {
+    "bgs": []
+  }
+}
