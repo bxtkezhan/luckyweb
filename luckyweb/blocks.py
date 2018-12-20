@@ -146,8 +146,6 @@ class Template(object):
         code.add_line("return ''.join(result)")
         code.dedent()
         self._render_function = code.get_globals()['render_function']
-        # print('=' * 32)
-        # print(code)
 
     def _expr_code(self, expr):
         if '|' in expr:
@@ -166,7 +164,6 @@ class Template(object):
             i_name = expr.split('[')[1].split(']')[0]
             self._variable(f_name, self.all_vars)
             def isinteger(string):
-                # print('Debug', string)
                 try:
                     num = int(string)
                 except ValueError:
