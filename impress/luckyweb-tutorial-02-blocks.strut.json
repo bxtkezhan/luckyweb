@@ -1,0 +1,227 @@
+{
+  "slides": [
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 286,
+          "y": 294,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "<font><b>Blocks的原理</b></font>",
+          "size": 72,
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 0,
+      "selected": true,
+      "active": true,
+      "markdown": "",
+      "x": 196,
+      "y": 278
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 200,
+          "y": 60,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "一、将Bootstrap模板进行封装<br>",
+          "size": 48,
+          "selected": false
+        },
+        {
+          "src": "https://getbootstrap.com/",
+          "type": "WebFrame",
+          "x": 197,
+          "y": 171,
+          "scale": {
+            "x": 0.6822916666666666,
+            "y": 0.6822916666666666,
+            "width": 655,
+            "height": 524
+          },
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 1,
+      "selected": false,
+      "active": false,
+      "x": 460,
+      "y": 180
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 125,
+          "y": 35,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 48,
+          "text": "<font>二、通过Python代码在后台进行调用</font>",
+          "selected": false
+        },
+        {
+          "src": "https://i.imgur.com/dLLNT60.png",
+          "type": "Image",
+          "x": 40,
+          "y": 146,
+          "scale": {
+            "x": 0.6963235294117647,
+            "y": 0.6963235294117647,
+            "width": 947,
+            "height": 534.7764705882353
+          },
+          "imageType": "PNG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 2,
+      "selected": false,
+      "active": false,
+      "x": 740,
+      "y": 180
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 100,
+          "y": 200,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 48,
+          "text": "<font>使用`print`方法在shell中进行测试</font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 100,
+          "y": 300,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 48,
+          "text": "<font>通过`help`方法查看类的文档</font>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 3,
+      "selected": false,
+      "active": false,
+      "x": 740,
+      "y": 369
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 330,
+          "y": 249,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 64,
+          "text": "<font color=\"#0071ff\"><a href=\"https://github.com/bxtkezhan/luckyweb/blob/master/examples/02_blocks.py\" target=\"_blank\">UI综合示例</a></font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 331,
+          "y": 384,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 64,
+          "text": "<font color=\"#0071ff\"><a href=\"https://github.com/bxtkezhan/luckyweb/blob/master/examples/02_blocks.py\" target=\"_blank\">UI综合示例</a></font>",
+          "selected": false,
+          "rotate": 3.14
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 3.14,
+      "rotateY": 3.14,
+      "rotateZ": 0,
+      "index": 4,
+      "selected": false,
+      "active": false,
+      "x": 462,
+      "y": 370
+    }
+  ],
+  "activeSlide": {
+    "components": [
+      {
+        "TextBox": {},
+        "x": 286,
+        "y": 294,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "TextBox",
+        "text": "<font><b>Blocks的原理</b></font>",
+        "size": 72,
+        "selected": false
+      }
+    ],
+    "z": 0,
+    "impScale": 3,
+    "rotateX": 0,
+    "rotateY": 0,
+    "rotateZ": 0,
+    "index": 0,
+    "selected": true,
+    "active": true,
+    "markdown": "",
+    "x": 196,
+    "y": 278
+  },
+  "fileName": "luckyweb-tutorial-02-blocks.strut",
+  "deckVersion": "1.0",
+  "customBackgrounds": {
+    "bgs": []
+  }
+}
