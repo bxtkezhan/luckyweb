@@ -3,8 +3,11 @@ import luckyweb.blocks as B
 
 def helloserver(request, response):
     if request.method == 'POST':
-        script = request.params.get('file', b'').decode()
-        return response.plain(script)
+        filedata = request.data.get('file')
+        filename = filedata.filename
+        content = filedata.file.read().decode()
+        result = '# {}\n\n{}'.format(filename, content)
+        return response.plain(result)
 
     html = B.HtmlBlock(title='Upload file')
     grid = B.GridBlock([4, 4, 4])

@@ -99,6 +99,7 @@ class Request:
         self.environ = environ
         self.params = self.environ.get('params', dict())
         self.method = self.environ.get('REQUEST_METHOD')
+        self.data = self.environ.get('data')
 
 class Response:
     def __init__(self, start_response, charset):
@@ -168,7 +169,12 @@ class Server:
 
         params = cgi.FieldStorage(environ['wsgi.input'], environ=environ)
         method = environ['REQUEST_METHOD'].lower()
-        environ['params'] = {key: params.getvalue(key) for key in params}
+        # environ['params'] = {key: params.getvalue(key) for key in params}
+        environ['params'] = {}
+        environ['data'] = {}
+        for key in params:
+            environ['params'][key] = params.getvalue(key)
+            environ['data'][key] = params[key]
         handler = self.pathmap.get((method, '/' + path), notfound_404)
         return handler(environ, start_response)
 
