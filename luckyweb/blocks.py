@@ -239,13 +239,13 @@ class BaseBlock:
         return self.html.encode(encoding)
 
 class HtmlBlock(BaseBlock):
+    '''
+    Arguments:
+    - title: text content of html title element
+    - css_urls: css link list
+    - js_urls: javascript link list
+    '''
     def __init__(self, title='', css_urls=[], js_urls=[]):
-        '''
-        Arguments:
-        - title: text content of html title element
-        - css_urls: css link list
-        - js_urls: javascript link list
-        '''
         css_urls = css_urls or [
             'https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css']
         js_urls = js_urls or [
@@ -256,91 +256,151 @@ class HtmlBlock(BaseBlock):
         self.args.update({'title': title, 'css_urls': css_urls, 'js_urls': js_urls})
 
 class GridBlock(BaseBlock):
+    '''
+    Arguments:
+    - cols_num: container col-sm-num list in bootstrap framwork
+    - py: padding y num in bootstrap framework, default is 5
+    '''
     def __init__(self, cols_num=[], py=5):
-        '''
-        Arguments:
-        - cols_num: container col-sm-num list in bootstrap framwork
-        - py: padding y num in bootstrap framework, default is 5
-        '''
         super(GridBlock, self).__init__('grid.tpl')
         self.args.update({'cols_num': cols_num, 'py': py})
 
 class NavbarBlock(BaseBlock):
+    '''
+    Arguments:
+    - left_items: is a list of dicts, [dict(active=True, href='xxx', text='xxx') ... ]
+    - right_items: is a list of dicts, [dict(btn=False, href='xxx', text='xxx') ... ]
+    - _class: is a html attr, same to class in html
+    '''
     def __init__(self, left_items=[], right_items=[], _class='bg-dark navbar-dark'):
-        '''
-        Arguments:
-        - left_items: is a list of dicts, [dict(active=True, href='xxx', text='xxx') ... ]
-        - right_items: is a list of dicts, [dict(btn=False, href='xxx', text='xxx') ... ]
-        - _class: is a html attr, same to class in html
-        '''
         super(NavbarBlock, self).__init__('navbar.tpl')
         self.args.update({'left_items': left_items, 'right_items': right_items, '_class': _class})
         self.html = self.template.render(self.args)
 
 class ImgBlock(BaseBlock):
+    '''
+    Arugments:
+    - src: attr of img tag
+    - href: attr of img tag, default '#'
+    - alt: attr of img tag, default '#'
+    - _class: class of img tag, default 'img-thumbnail'
+    '''
     def __init__(self, src, href='#', alt='#', _class='img-thumbnail'):
-        '''
-        Arugments:
-        - src: attr of img tag
-        - href: attr of img tag, default '#'
-        - alt: attr of img tag, default '#'
-        - _class: class of img tag, default 'img-thumbnail'
-        '''
         super(ImgBlock, self).__init__('img.tpl')
         self.args.update({
             'src': src, 'href': href, 'alt': alt, '_class': _class})
         self.html = self.template.render(self.args)
 
 class HeadBlock(BaseBlock):
+    '''
+    Arguments:
+    - text: text string in head tag
+    - head_num: <h{{ head_num }}> ... </h{{ head_num }}>
+    - display_num: <h1 class="display-{{ display_num }}"> ...
+    - center: type is bool, if center is True, addition <center> tag over head
+    '''
     def __init__(self, text, head_num=3, display_num=None, center=False):
-        '''
-        Arguments:
-        - text: text string in head tag
-        - head_num: <h{{ head_num }}> ... </h{{ head_num }}>
-        - display_num: <h1 class="display-{{ display_num }}"> ...
-        - center: type is bool, if center is True, addition <center> tag over head
-        '''
         super(HeadBlock, self).__init__('head.tpl')
         self.args.update({
             'text': text, 'head_num': head_num, 'display_num': display_num, 'center': center})
         self.html = self.template.render(self.args)
 
 class PBlock(BaseBlock):
+    '''
+    Arguments:
+    - text: <p>{{ text }}</p>
+    - lead: type is bool, if lead is True, add "lead" in tag class
+    '''
     def __init__(self, text, lead=False):
         super(PBlock, self).__init__('p.tpl')
         self.args.update({'text': text, 'lead': lead})
         self.html = self.template.render(self.args)
 
 class ABlock(BaseBlock):
+    '''
+    Arguments:
+    - text: <a>{{ text }}</a>
+    - href: <a href="{{ href }}"> ...
+    - _class: <a class="btn {{ _class }}"> ...
+    '''
     def __init__(self, text, href='#', _class="btn-primary"):
         super(ABlock, self).__init__('a.tpl')
         self.args.update({'text': text, 'href': href, '_class': _class})
         self.html = self.template.render(self.args)
 
 class TableBlock(BaseBlock):
+    '''
+    Arguments:
+    - array: 2D list, type of item must be str or block
+    - _class:   <table class="table {{ _class }}">
+    '''
     def __init__(self, array, _class=''):
         super(TableBlock, self).__init__('table.tpl')
         self.args.update({'array': array, '_class': _class})
         self.html = self.template.render(self.args)
 
 class PaginationBlock(BaseBlock):
+    '''
+    Argument:
+    - pages: [dict(active=True, disabled=False, href='http://xxxx', text='xxx'), ...]
+      <ul class="pagination" >
+        {% for page in pages %}
+          {% if page.active %}
+        <li class="page-item active"> <a class="page-link" href="{{ page.href }}">{{ page.text }}</a> </li>
+          {% else %}
+                {% if page.disabled %}
+        <li class="page-item disabled"> <a class="page-link" href="{{ page.href }}">{{ page.text }}</a> </li>
+            {% else %}
+        <li class="page-item"> <a class="page-link" href="{{ page.href }}">{{ page.text }}</a> </li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    '''
     def __init__(self, pages=[]):
         super(PaginationBlock, self).__init__('pagination.tpl')
         self.args.update({'pages': pages})
         self.html = self.template.render(self.args)
 
 class ListBlock(BaseBlock):
+    '''
+    Arguments:
+    - _list: [dict(href='xxx', _class='xxx', text='xxx'), ...]
+    - _class: <div class="list-group {{ _class }}">
+    '''
     def __init__(self, _list=[], _class=''):
         super(ListBlock, self).__init__('list.tpl')
         self.args.update({'_list': _list, '_class': _class})
         self.html = self.template.render(self.args)
 
 class CardBlock(BaseBlock):
+    '''
+    Argument:
+    - header: header text, default is ''
+      {% if header %}
+      <div class="card-header" > {{ header }} </div>
+      {% endif %}
+    '''
     def __init__(self, header=''):
         super(CardBlock, self).__init__('card.tpl')
         self.args.update({'header': header})
 
 class FormBlock(BaseBlock):
+    '''
+    Arguments:
+      <form action="{{ action }}" method="{{ method }}" enctype="{{ enctype }}">
+        {% for group in groups %}
+        <div class="form-group">
+          <label>{{ group.label }}</label>
+          <input type="{{ group.type }}" class="form-control" placeholder="{{ group.placeholder }}" name="{{ group.name }}">
+              {% if group.text %}
+          <small class="form-text text-muted">{{ group.text }}</small>
+              {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">{{ submit_text }}</button>
+      </form>
+    '''
     def __init__(self, action, groups, method='post',
                  enctype='multipart/form-data', submit_text='Submit'):
         super(FormBlock, self).__init__('form.tpl')
@@ -348,4 +408,3 @@ class FormBlock(BaseBlock):
             'action': action, 'groups': groups, 'method': method,
             'enctype': enctype, 'submit_text': submit_text})
         self.html = self.template.render(self.args)
-
