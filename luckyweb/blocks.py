@@ -265,6 +265,18 @@ class GridBlock(BaseBlock):
         super(GridBlock, self).__init__('grid.tpl')
         self.args.update({'cols_num': cols_num, 'py': py})
 
+class CardBlock(BaseBlock):
+    '''
+    Argument:
+    - header: header text, default is ''
+      {% if header %}
+      <div class="card-header" > {{ header }} </div>
+      {% endif %}
+    '''
+    def __init__(self, header=''):
+        super(CardBlock, self).__init__('card.tpl')
+        self.args.update({'header': header})
+
 class NavbarBlock(BaseBlock):
     '''
     Arguments:
@@ -332,7 +344,7 @@ class TableBlock(BaseBlock):
     '''
     Arguments:
     - array: 2D list, type of item must be str or block
-    - _class:   <table class="table {{ _class }}">
+    - _class: <table class="table {{ _class }}">
     '''
     def __init__(self, array, _class=''):
         super(TableBlock, self).__init__('table.tpl')
@@ -372,18 +384,6 @@ class ListBlock(BaseBlock):
         super(ListBlock, self).__init__('list.tpl')
         self.args.update({'_list': _list, '_class': _class})
         self.html = self.template.render(self.args)
-
-class CardBlock(BaseBlock):
-    '''
-    Argument:
-    - header: header text, default is ''
-      {% if header %}
-      <div class="card-header" > {{ header }} </div>
-      {% endif %}
-    '''
-    def __init__(self, header=''):
-        super(CardBlock, self).__init__('card.tpl')
-        self.args.update({'header': header})
 
 class FormBlock(BaseBlock):
     '''
