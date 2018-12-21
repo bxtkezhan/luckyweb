@@ -1,5 +1,6 @@
 import luckyweb.blocks as B
 
+
 def helloserver(request, response):
     if request.method == 'POST':
         return response.jsonify(request.params)
@@ -10,8 +11,10 @@ def helloserver(request, response):
         {'label': 'Name', 'type': 'text', 'placeholder': 'please input name text', 'name': 'name'},
         {'label': 'Email', 'type': 'email', 'placeholder': 'please input email', 'name': 'email'},
         {'label': 'Password', 'type': 'password', 'placeholder': 'please input password', 'name': 'password'}])
+    img = B.ImgBlock(src='/static/L.png')
+
     html(
-        grid(['', form, '']),
+        grid(['', form, img]),
     )
 
     return html
