@@ -1,0 +1,129 @@
+{
+  "slides": [
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 326,
+          "y": 309,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "<font><b>Server模块</b></font>",
+          "size": 72,
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 0,
+      "selected": true,
+      "active": true,
+      "x": 180,
+      "y": 180
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 180,
+          "y": 140,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 64,
+          "text": "<div style=\"text-align: left;\">GET/POST传递参数</div>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 200,
+          "y": 255,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 64,
+          "text": "<font>Response返还</font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 200,
+          "y": 370,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 64,
+          "text": "静态文件访问<br>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 200,
+          "y": 485,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 64,
+          "text": "<font>run方法</font>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 1,
+      "selected": false,
+      "active": false,
+      "markdown": "",
+      "x": 460,
+      "y": 180
+    }
+  ],
+  "background": "bg-default",
+  "activeSlide": {
+    "components": [
+      {
+        "TextBox": {},
+        "x": 326,
+        "y": 309,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "TextBox",
+        "text": "<font><b>Server模块</b></font>",
+        "size": 72,
+        "selected": false
+      }
+    ],
+    "z": 0,
+    "impScale": 3,
+    "rotateX": 0,
+    "rotateY": 0,
+    "rotateZ": 0,
+    "index": 0,
+    "selected": true,
+    "active": true,
+    "x": 180,
+    "y": 180
+  },
+  "fileName": "luckyweb-tutorial-03-server.strut",
+  "overviewX": 320,
+  "overviewY": 180
+}
