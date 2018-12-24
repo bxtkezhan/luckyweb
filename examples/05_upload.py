@@ -5,8 +5,9 @@ def helloserver(request, response):
     if request.method == 'POST':
         filedata = request.data.get('file')
         filename = filedata.filename
+        filetype = filedata.type
         content = filedata.file.read().decode()
-        result = '# {}\n\n{}'.format(filename, content)
+        result = '# filename: {}, type: {}\n\n{}'.format(filename, filetype, content)
         return response.plain(result)
 
     html = B.HtmlBlock(title='Upload file')
