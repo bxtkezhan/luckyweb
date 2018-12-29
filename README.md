@@ -43,3 +43,7 @@ if __name__ == '__main__':
     app.register('/', helloworld)
     app.run()
 ```
+
+**bilibili 官方视频教程**
+
+https://www.bilibili.com/video/av39212787
