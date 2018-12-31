@@ -5,6 +5,7 @@ import mimetypes
 from wsgiref.headers import Headers
 import json
 from wsgiref.simple_server import make_server
+from http.cookies import SimpleCookie
 
 
 def notfound_404(environ, start_response):
@@ -94,18 +95,27 @@ class StaticHandle:
         else:
             return notfound_404(environ, start_response)
 
+class Cookie(SimpleCookie):
+    def get_value(self, key):
+        return self.get(key).value
+
+    def output(self, header='Set-Cookie'):
+        return (header, super(Cookie, self).output(header='').strip())
+
 class Request:
     def __init__(self, environ):
         self.environ = environ
-        self.params = self.environ.get('params', dict())
-        self.method = self.environ.get('REQUEST_METHOD')
+        self.params = self.environ.get('params')
         self.data = self.environ.get('data')
+        self.method = self.environ.get('REQUEST_METHOD')
+        self.cookie = Cookie(self.environ.get('HTTP_COOKIE', ''))
 
 class Response:
     def __init__(self, start_response, charset):
         self.start_response = start_response
         self.charset = charset
         self.content_type = 'text/html; charset={}'.format(self.charset)
+        self.set_cookie = Cookie()
         self.started = False
 
     def set_content_type(self, content_type):
@@ -121,13 +131,13 @@ class Response:
 
     def start(self):
         if not self.started:
-            self.start_response('200 OK', [('Content-type', self.content_type)])
+            self.start_response('200 OK', [('Content-type', self.content_type), self.set_cookie.output()])
             self.started = True
             return True
         return False
 
     def redirect(self, location):
-        self.start_response('302 Found', [('Location', location)])
+        self.start_response('302 Found', [('Location', location), self.set_cookie.output()])
         self.started = True
         return '1'
 
@@ -169,7 +179,6 @@ class Server:
 
         params = cgi.FieldStorage(environ['wsgi.input'], environ=environ)
         method = environ['REQUEST_METHOD'].lower()
-        # environ['params'] = {key: params.getvalue(key) for key in params}
         environ['params'] = {}
         environ['data'] = {}
         for key in params:
