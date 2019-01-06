@@ -11,11 +11,11 @@ def helloserver(request, response):
         return response.jsonify(request.params)
 
     html = B.HtmlBlock(title='luckyweb deploy')
-    grid = B.GridBlock([4, 4, 4])
+    grid = B.GridBlock([3, 6, 3])
     form = B.FormBlock('/', method='post', groups=[
-        {'label': 'Name', 'type': 'text', 'placeholder': 'please input name text', 'name': 'name'},
-        {'label': 'Email', 'type': 'email', 'placeholder': 'please input email', 'name': 'email'},
-        {'label': 'Password', 'type': 'password', 'placeholder': 'please input password', 'name': 'password'}])
+        dict(label='Name', type='text', placeholder='please input name text', name='name', row=True),
+        dict(label='Email', type='email', placeholder='please input email', name='email', row=True),
+        dict(label='Password', type='password', placeholder='please input password', name='password', row=True)])
     html(
         grid(['', form, '']),
     )
