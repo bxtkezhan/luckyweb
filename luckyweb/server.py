@@ -125,9 +125,9 @@ class Response:
         self.content_type = 'text/plain; charset={}'.format(self.charset)
         return obj
 
-    def jsonify(self, obj):
+    def jsonify(self, obj, ensure_ascii=True, indent=None, sort_keys=False):
         self.content_type = 'application/json; charset={}'.format(self.charset)
-        return json.dumps(obj)
+        return json.dumps(obj, ensure_ascii=ensure_ascii, indent=indent, sort_keys=sort_keys)
 
     def start(self):
         if not self.started:
