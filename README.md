@@ -22,10 +22,16 @@ python3 setup.py build
 python3 setup.py install
 ```
 
-3 . 使用`pip`工具直接clone并安装
+3 . 使用`pip`工具clone安装
 
 ```bash
 pip install git+https://github.com/bxtkezhan/luckyweb.git
+```
+
+4 . 使用`pip`工具直接从PyPi下载安装
+
+```bash
+pip install luckyweb
 ```
 
 **Hello World**
