@@ -1,6 +1,8 @@
 from setuptools import setup, find_packages
 
-exec(open('luckyweb/version.py').read())
+with open('luckyweb/version.py') as f:
+    version_script = f.read()
+    exec(version_script)
 
 setup(
     name='luckyweb',

@@ -1,2 +1,2 @@
-from luckyweb.server import Server as LuckyWeb
-from luckyweb.version import __version__
+from .server import Server as LuckyWeb
+from .version import __version__
